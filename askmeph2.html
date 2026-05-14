@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Migration Project - 任務分工知識庫</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --secondary: #0891b2;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-dark: #0f172a;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'Noto Sans CJK TC', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a365d 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 登入頁面樣式 */
+        .login-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a365d 100%);
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-box h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .login-box .subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .login-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+        }
+
+        .error-message {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* 主頁面樣式 */
+        .app-page {
+            display: none;
+        }
+
+        .app-page.show {
+            display: block;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .top-right-controls {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            z-index: 100;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            background: white;
+            color: var(--text-dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .btn-small:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .input-section h2::before {
+            content: '🎯';
+            font-size: 1.6rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        textarea, input[type="text"], select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus, input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .results-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid var(--primary);
+            animation: fadeInRight 0.8s ease-out;
+            display: none;
+        }
+
+        .result-card.show {
+            display: block;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .department-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1rem;
+        }
+
+        .dept-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .dept-info h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .dept-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .match-score {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tasks-list {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .tasks-list h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            padding: 0.5rem;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .task-item::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .keyword-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .no-results {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            display: none;
+            padding: 2rem;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .ai-badge::before {
+            content: '✨';
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .top-right-controls {
+                flex-direction: column;
+            }
+        }
+
+        .guide-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .guide-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .guide-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .guide-item {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .guide-item strong {
+            color: var(--text-dark);
+        }
+
+        .guide-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .share-info {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .share-info p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .share-link {
+            background: white;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+            color: var(--primary);
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- 登入頁面 -->
+    <div class="login-page" id="loginPage">
+        <div class="login-box">
+            <h1>☁️ Cloud Migration</h1>
+            <p class="subtitle">任務分工知識庫</p>
+            
+            <div class="error-message" id="errorMessage"></div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="password">🔑 輸入訪問密碼</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="請輸入密碼"
+                        autocomplete="off"
+                    />
+                </div>
+                <button type="submit" class="login-btn">進入知識庫</button>
+            </form>
+
+            <div class="share-info" style="margin-top: 2rem; background: rgba(16, 185, 129, 0.1);">
+                <p style="color: var(--success); font-weight: 600;">✅ 密碼已設置</p>
+                <p style="font-size: 0.85rem; color: var(--text-light);">此頁面受密碼保護</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主應用頁面 -->
+    <div class="app-page" id="appPage">
+        <div class="top-right-controls">
+            <button class="btn-small" id="shareBtn">📤 分享連結</button>
+            <button class="btn-small" id="logoutBtn">🚪 登出</button>
+        </div>
+
+        <div class="container">
+            <header>
+                <h1>☁️ Cloud Migration Project</h1>
+                <p class="subtitle">AI 驅動的任務分工知識庫</p>
+                <div class="badge-group">
+                    <span class="badge">📋 智能查詢</span>
+                    <span class="badge">🤖 AI 推薦</span>
+                    <span class="badge">🎯 快速定位</span>
+                </div>
+            </header>
+
+            <div class="guide-section">
+                <h2>❓ 使用方法</h2>
+                <div class="guide-items">
+                    <div class="guide-item">
+                        <strong>📝 描述你的任務</strong>
+                        <p>在左側輸入框描述你現在要做的工作，越詳細越好。例如：「我需要建立資料庫複製」</p>
+                    </div>
+                    <div class="guide-item">
+                        <strong>🔍 選擇查詢方式</strong>
+                        <p>選擇「直接搜尋」來快速查詢，或選擇「AI 推薦」讓系統分析並推薦最相關的部門</p>
+                    </div>
+                    <div class="guide-item">
+                        <strong>✨ 得到結果</strong>
+                        <p>系統會在右側顯示相關部門、負責人聯繫方式和該部門的主要職責</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="input-section">
+                    <h2>輸入你的任務</h2>
+                    
+                    <div class="form-group">
+                        <label for="taskInput">📌 任務描述</label>
+                        <textarea id="taskInput" placeholder="例如：我們需要建立 Redis 和 CloudSQL 環境...&#10;&#10;或輸入部門名稱：GCP、AP、設規、主機、網路、DBA..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="queryType">🔎 查詢方式</label>
+                        <select id="queryType">
+                            <option value="ai">🤖 AI 推薦（智能分析）- 推薦最相關的部門</option>
+                            <option value="keyword">🔍 關鍵字搜尋 - 快速精確查詢</option>
+                        </select>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-primary" id="searchBtn">查詢部門分工</button>
+                        <button class="btn-secondary" id="clearBtn">清除</button>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+                        <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem;">
+                            📚 <strong>知識庫狀態：</strong> 已載入 9 個部門
+                        </p>
+                        <p style="font-size: 0.75rem; color: var(--text-light); text-align: center;">
+                            版本：Phase2_Cloud_Migration_v2.1
+                        </p>
+                    </div>
+                </div>
+
+                <div class="results-section">
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>AI 正在分析你的任務...</p>
+                    </div>
+                    
+                    <div class="no-results" id="noResults">
+                        <div class="no-results-icon">🔍</div>
+                        <h3>還沒有搜尋結果</h3>
+                        <p>在左側輸入你的任務描述，點擊「查詢部門分工」即可開始搜尋</p>
+                    </div>
+
+                    <div id="resultsContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 設定區域 ==========
+        const CONFIG = {
+            password: 'cloud2024',  // 你可以修改這個密碼
+            knowledgeBase: {
+                "GCP": {
+                    full_name: "Google Cloud Platform 團隊",
+                    icon: "☁️",
+                    contact: "待補充",
+                    tasks: [
+                        "Hub 管理員建立 IAM 政策",
+                        "Spoke 管理員建立並請求 VPC spoke",
+                        "VPC Spoke 請求審查與同意",
+                        "Proxy VM 建立與 IP 提供",
+                        "Redis 建立",
+                        "CloudSQL 建立"
+                    ],
+                    keywords: ["雲", "GCP", "Google Cloud", "VPC", "Redis", "CloudSQL", "IAM", "Proxy"]
+                },
+                "AP": {
+                    full_name: "應用程式開發/維運團隊",
+                    icon: "💻",
+                    contact: "待補充",
+                    tasks: [
+                        "系統架構評估",
+                        "應用程式相依性識別",
+                        "DB 版本確認與升級",
+                        "Code Change 實施",
+                        "Code Review",
+                        "性能測試"
+                    ],
+                    keywords: ["應用", "APP", "代碼", "程式", "開發", "DB", "資料庫", "系統"]
+                },
+                "設規": {
+                    full_name: "系統規劃/架構團隊",
+                    icon: "📐",
+                    contact: "待補充",
+                    tasks: [
+                        "系統需求分析",
+                        "架構設計與規劃",
+                        "費用估算",
+                        "設計審查與簽核",
+                        "MDR 連線申請",
+                        "跨單位協調"
+                    ],
+                    keywords: ["設計", "架構", "規劃", "費用", "預算", "簽核", "需求"]
+                },
+                "主機": {
+                    full_name: "主機/基礎設施團隊",
+                    icon: "🖥️",
+                    contact: "待補充",
+                    tasks: [
+                        "GKE 建置與管理",
+                        "Cloud-init 配置",
+                        "虛擬機規格設定",
+                        "基礎設施部署",
+                        "系統參數調整"
+                    ],
+                    keywords: ["主機", "基礎設施", "GKE", "VM", "虛擬機", "建置", "設定"]
+                },
+                "網路": {
+                    full_name: "網路團隊",
+                    icon: "🌐",
+                    contact: "待補充",
+                    tasks: [
+                        "雲地連線開通",
+                        "VPC 建立與管理",
+                        "Firewall Policy 設定",
+                        "Load Balancer 配置",
+                        "網路通訊驗證"
+                    ],
+                    keywords: ["網路", "連線", "firewall", "policy", "VPC", "通訊", "開通", "LB"]
+                },
+                "DBA": {
+                    full_name: "資料庫管理團隊",
+                    icon: "🗄️",
+                    contact: "待補充",
+                    tasks: [
+                        "資料庫複製",
+                        "版本升級評估",
+                        "備份與復原策略",
+                        "性能優化",
+                        "帳號與權限管理"
+                    ],
+                    keywords: ["資料庫", "DB", "database", "複製", "版本", "升級", "備份"]
+                },
+                "資安": {
+                    full_name: "資訊安全團隊",
+                    icon: "🔒",
+                    contact: "待補充",
+                    tasks: [
+                        "安全政策制定",
+                        "IP 白名單管理",
+                        "防火牆規則設定",
+                        "權限控制審查",
+                        "安全測試"
+                    ],
+                    keywords: ["資安", "安全", "防火牆", "IP", "白名單", "政策", "權限"]
+                },
+                "RD": {
+                    full_name: "研發部門",
+                    icon: "🔬",
+                    contact: "待補充",
+                    tasks: [
+                        "監控系統建置",
+                        "日誌分析與管理",
+                        "性能監測",
+                        "告警設定"
+                    ],
+                    keywords: ["研發", "監控", "logging", "分析", "監測", "Elastic"]
+                },
+                "雲端": {
+                    full_name: "雲端平台團隊",
+                    icon: "☁️🔧",
+                    contact: "待補充",
+                    tasks: [
+                        "GCP 帳號申請與管理",
+                        "Group 與 Project 權限設定",
+                        "雲端資源配置",
+                        "成本管理"
+                    ],
+                    keywords: ["雲端", "帳號", "group", "project", "申請", "權限"]
+                }
+            }
+        };
+
+        // ========== 登入功能 ==========
+        const loginPage = document.getElementById('loginPage');
+        const appPage = document.getElementById('appPage');
+        const loginForm = document.getElementById('loginForm');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // 檢查是否已登入
+        function checkLogin() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                showApp();
+            } else {
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            loginPage.style.display = 'flex';
+            appPage.classList.remove('show');
+        }
+
+        function showApp() {
+            loginPage.style.display = 'none';
+            appPage.classList.add('show');
+            initializeApp();
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = passwordInput.value;
+            
+            if (password === CONFIG.password) {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                errorMessage.classList.remove('show');
+                showApp();
+            } else {
+                errorMessage.textContent = '❌ 密碼不正確，請重試';
+                errorMessage.classList.add('show');
+                passwordInput.value = '';
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('isLoggedIn');
+            showLogin();
+            passwordInput.value = '';
+        });
+
+        // ========== 應用功能 ==========
+        let isAppInitialized = false;
+
+        function initializeApp() {
+            if (isAppInitialized) return;
+            isAppInitialized = true;
+
+            const taskInput = document.getElementById('taskInput');
+            const queryType = document.getElementById('queryType');
+            const searchBtn = document.getElementById('searchBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const loading = document.getElementById('loading');
+            const noResults = document.getElementById('noResults');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const shareBtn = document.getElementById('shareBtn');
+
+            // 分享按鈕
+            shareBtn.addEventListener('click', () => {
+                const currentUrl = window.location.href;
+                const shareText = `📚 Cloud Migration Project - 任務分工知識庫\n\n加入我們的知識庫，快速查詢任務分工：\n\n${currentUrl}\n\n此連結受密碼保護，只有知道密碼的人才能訪問。`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Cloud Migration 知識庫',
+                        text: shareText,
+                        url: currentUrl
+                    });
+                } else {
+                    // 複製到剪貼板
+                    navigator.clipboard.writeText(currentUrl).then(() => {
+                        alert('✅ 連結已複製到剪貼板！\n\n' + currentUrl);
+                    });
+                }
+            });
+
+            // 搜尋功能
+            searchBtn.addEventListener('click', performSearch);
+            taskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && e.ctrlKey) performSearch();
+            });
+
+            clearBtn.addEventListener('click', () => {
+                taskInput.value = '';
+                resultsContainer.innerHTML = '';
+                noResults.classList.add('show');
+            });
+
+            function performSearch() {
+                const task = taskInput.value.trim().toLowerCase();
+                
+                if (!task) {
+                    alert('請輸入任務描述');
+                    return;
+                }
+
+                loading.classList.add('show');
+                noResults.classList.remove('show');
+                resultsContainer.innerHTML = '';
+
+                // 模擬 AI 處理時間
+                setTimeout(() => {
+                    const results = queryType.value === 'ai' 
+                        ? searchWithAI(task) 
+                        : searchByKeyword(task);
+                    displayResults(results);
+                    loading.classList.remove('show');
+                }, 1500);
+            }
+
+            function searchWithAI(task) {
+                const results = [];
+                
+                for (const [dept, data] of Object.entries(CONFIG.knowledgeBase)) {
+                    let score = 0;
+                    
+                    data.keywords.forEach(keyword => {
+                        if (task.includes(keyword)) score += 3;
+                    });
+                    
+                    data.tasks.forEach(taskItem => {
+                        if (task.includes(taskItem.toLowerCase())) score += 2;
+                    });
+                    
+                    if (task.includes(dept.toLowerCase())) score += 5;
+                    
+                    if (score > 0) {
+                        results.push({ dept, score, data });
+                    }
+                }
+                
+                return results.sort((a, b) => b.score - a.score);
+            }
+
+            function searchByKeyword(task) {
+                const results = [];
+                
+                for (const [dept, data] of Object.entries(CONFIG.knowledgeBase)) {
+                    if (dept.toLowerCase().includes(task) || 
+                        data.full_name.toLowerCase().includes(task)) {
+                        results.push({ dept, score: 10, data });
+                    }
+                }
+                
+                return results;
+            }
+
+            function displayResults(results) {
+                if (results.length === 0) {
+                    noResults.classList.add('show');
+                    return;
+                }
+
+                resultsContainer.innerHTML = results.map((result, index) => {
+                    const { dept, score, data } = result;
+                    const percentage = Math.min(100, Math.round(score * 10));
+                    
+                    return `
+                        <div class="result-card show" style="animation-delay: ${index * 0.1}s;">
+                            <div class="department-header">
+                                <div class="dept-icon">${data.icon}</div>
+                                <div class="dept-info" style="flex: 1;">
+                                    <h3>${dept}</h3>
+                                    <p>${data.full_name}</p>
+                                </div>
+                                <div class="match-score">匹配度 ${percentage}%</div>
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: var(--text-dark);">聯繫方式：</strong>
+                                <p style="color: var(--text-light); font-size: 0.9rem;">${data.contact}</p>
+                            </div>
+
+                            <div class="tasks-list">
+                                <h4>主要職責：</h4>
+                                ${data.tasks.map(task => `<div class="task-item">${task}</div>`).join('')}
+                            </div>
+
+                            <div class="keywords">
+                                ${data.keywords.map(kw => `<span class="keyword-badge">${kw}</span>`).join('')}
+                            </div>
+
+                            <div class="ai-badge">AI 推薦部門</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // 初始化
+            noResults.classList.add('show');
+        }
+
+        // 頁面加載時檢查登入狀態
+        window.addEventListener('load', checkLogin);
+    </script>
+</body>
+</html>
