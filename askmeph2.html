@@ -38,13 +38,12 @@
             padding: 2rem;
         }
 
-        /* 登入頁面樣式 */
+        /* 登入頁面 */
         .login-page {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a365d 100%);
         }
 
         .login-box {
@@ -59,14 +58,8 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .login-box h1 {
@@ -144,7 +137,7 @@
             display: block;
         }
 
-        /* 主頁面樣式 */
+        /* 主頁面 */
         .app-page {
             display: none;
         }
@@ -156,7 +149,7 @@
         header {
             text-align: center;
             color: white;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             animation: slideDown 0.6s ease-out;
         }
 
@@ -164,7 +157,6 @@
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
         }
 
         .subtitle {
@@ -217,87 +209,48 @@
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .input-section {
+        .search-section {
             background: white;
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
             animation: fadeInUp 0.8s ease-out;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .input-section h2 {
+        .search-section h2 {
             font-size: 1.4rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
+        }
+
+        .search-box {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
-        .input-section h2::before {
-            content: '🎯';
-            font-size: 1.6rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.95rem;
-        }
-
-        textarea, input[type="text"], select {
-            width: 100%;
+        .search-box input {
+            flex: 1;
             padding: 0.75rem;
             border: 2px solid var(--border);
             border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.95rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
-        textarea:focus, input[type="text"]:focus, select:focus {
+        .search-box input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
-            background: white;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 1rem;
         }
 
         button {
-            flex: 1;
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 8px;
@@ -327,127 +280,84 @@
             background: var(--border);
         }
 
-        .results-section {
+        .results-container {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        .result-card {
+        .task-result {
             background: white;
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             border-left: 5px solid var(--primary);
-            animation: fadeInRight 0.8s ease-out;
-            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: slideInUp 0.5s ease-out;
         }
 
-        .result-card.show {
-            display: block;
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .department-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 1rem;
-        }
-
-        .dept-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        .task-number {
+            display: inline-block;
+            background: var(--primary);
             color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             font-weight: bold;
-        }
-
-        .dept-info h3 {
-            font-size: 1.3rem;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .dept-info p {
-            color: var(--text-light);
+            margin-right: 0.75rem;
             font-size: 0.9rem;
         }
 
-        .match-score {
-            display: inline-block;
-            background: var(--success);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .task-title {
+            font-size: 1rem;
             font-weight: 600;
-        }
-
-        .tasks-list {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: var(--bg-light);
-            border-radius: 8px;
-        }
-
-        .tasks-list h4 {
             color: var(--text-dark);
             margin-bottom: 0.75rem;
-            font-size: 0.95rem;
         }
 
-        .task-item {
+        .task-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-row {
             display: flex;
             align-items: flex-start;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
+            gap: 0.5rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            min-width: 80px;
+        }
+
+        .detail-value {
             color: var(--text-light);
-            padding: 0.5rem;
-            background: white;
-            border-radius: 6px;
-            border-left: 3px solid var(--accent);
+            flex: 1;
         }
 
-        .task-item::before {
-            content: '✓';
-            color: var(--success);
-            font-weight: bold;
-            font-size: 1rem;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .keywords {
+        .dept-badges {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
         }
 
-        .keyword-badge {
+        .dept-badge {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
             background: var(--accent);
             color: white;
+            padding: 0.4rem 0.75rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
@@ -456,14 +366,9 @@
         .no-results {
             background: white;
             border-radius: 16px;
-            padding: 2rem;
+            padding: 3rem;
             text-align: center;
             color: var(--text-light);
-            display: none;
-        }
-
-        .no-results.show {
-            display: block;
         }
 
         .no-results-icon {
@@ -474,8 +379,8 @@
         .loading {
             text-align: center;
             color: white;
-            display: none;
             padding: 2rem;
+            display: none;
         }
 
         .loading.show {
@@ -496,119 +401,14 @@
             to { transform: rotate(360deg); }
         }
 
-        .ai-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #8b5cf6, #ec4899);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 1rem;
-        }
-
-        .ai-badge::before {
-            content: '✨';
-        }
-
         @media (max-width: 992px) {
-            .main-content {
+            .task-details {
                 grid-template-columns: 1fr;
             }
 
             h1 {
                 font-size: 1.8rem;
             }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .top-right-controls {
-                flex-direction: column;
-            }
-        }
-
-        .guide-section {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .guide-section h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .guide-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .guide-item {
-            background: var(--bg-light);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent);
-        }
-
-        .guide-item strong {
-            color: var(--text-dark);
-        }
-
-        .guide-item p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .share-info {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-            text-align: center;
-        }
-
-        .share-info p {
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .share-link {
-            background: white;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            word-break: break-all;
-            color: var(--primary);
-            margin-top: 0.5rem;
-        }
-
-        .copy-btn {
-            padding: 0.5rem 1rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-top: 0.75rem;
-            transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background: var(--secondary);
         }
     </style>
 </head>
@@ -633,319 +433,164 @@
                 </div>
                 <button type="submit" class="login-btn">進入知識庫</button>
             </form>
-
-            <div class="share-info" style="margin-top: 2rem; background: rgba(16, 185, 129, 0.1);">
-                <p style="color: var(--success); font-weight: 600;">✅ 密碼已設置</p>
-                <p style="font-size: 0.85rem; color: var(--text-light);">此頁面受密碼保護</p>
-            </div>
         </div>
     </div>
 
     <!-- 主應用頁面 -->
     <div class="app-page" id="appPage">
         <div class="top-right-controls">
-            <button class="btn-small" id="shareBtn">📤 分享連結</button>
             <button class="btn-small" id="logoutBtn">🚪 登出</button>
         </div>
 
         <div class="container">
             <header>
                 <h1>☁️ Cloud Migration Project</h1>
-                <p class="subtitle">AI 驅動的任務分工知識庫</p>
+                <p class="subtitle">任務分工知識庫 - 精準查詢版</p>
                 <div class="badge-group">
-                    <span class="badge">📋 智能查詢</span>
-                    <span class="badge">🤖 AI 推薦</span>
-                    <span class="badge">🎯 快速定位</span>
+                    <span class="badge">📋 精準搜尋</span>
+                    <span class="badge">🎯 前 5 任務</span>
+                    <span class="badge">👥 負責單位</span>
                 </div>
             </header>
 
-            <div class="guide-section">
-                <h2>❓ 使用方法</h2>
-                <div class="guide-items">
-                    <div class="guide-item">
-                        <strong>📝 描述你的任務</strong>
-                        <p>在左側輸入框描述你現在要做的工作，越詳細越好。例如：「我需要建立資料庫複製」</p>
-                    </div>
-                    <div class="guide-item">
-                        <strong>🔍 選擇查詢方式</strong>
-                        <p>選擇「直接搜尋」來快速查詢，或選擇「AI 推薦」讓系統分析並推薦最相關的部門</p>
-                    </div>
-                    <div class="guide-item">
-                        <strong>✨ 得到結果</strong>
-                        <p>系統會在右側顯示相關部門、負責人聯繫方式和該部門的主要職責</p>
-                    </div>
+            <div class="search-section">
+                <h2>🔍 搜尋任務</h2>
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="輸入任務關鍵字，例如：Redis、Pipeline、DB、網路..."
+                        autocomplete="off"
+                    />
+                    <button class="btn-primary" id="searchBtn">搜尋</button>
+                    <button class="btn-secondary" id="clearBtn">清除</button>
                 </div>
             </div>
 
-            <div class="main-content">
-                <div class="input-section">
-                    <h2>輸入你的任務</h2>
-                    
-                    <div class="form-group">
-                        <label for="taskInput">📌 任務描述</label>
-                        <textarea id="taskInput" placeholder="例如：我們需要建立 Redis 和 CloudSQL 環境...&#10;&#10;或輸入部門名稱：GCP、AP、設規、主機、網路、DBA..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="queryType">🔎 查詢方式</label>
-                        <select id="queryType">
-                            <option value="ai">🤖 AI 推薦（智能分析）- 推薦最相關的部門</option>
-                            <option value="keyword">🔍 關鍵字搜尋 - 快速精確查詢</option>
-                        </select>
-                    </div>
-
-                    <div class="button-group">
-                        <button class="btn-primary" id="searchBtn">查詢部門分工</button>
-                        <button class="btn-secondary" id="clearBtn">清除</button>
-                    </div>
-
-                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
-                        <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem;">
-                            📚 <strong>知識庫狀態：</strong> 已載入 9 個部門
-                        </p>
-                        <p style="font-size: 0.75rem; color: var(--text-light); text-align: center;">
-                            版本：Phase2_Cloud_Migration_v2.1
-                        </p>
-                    </div>
-                </div>
-
-                <div class="results-section">
-                    <div class="loading" id="loading">
-                        <div class="spinner"></div>
-                        <p>AI 正在分析你的任務...</p>
-                    </div>
-                    
-                    <div class="no-results" id="noResults">
-                        <div class="no-results-icon">🔍</div>
-                        <h3>還沒有搜尋結果</h3>
-                        <p>在左側輸入你的任務描述，點擊「查詢部門分工」即可開始搜尋</p>
-                    </div>
-
-                    <div id="resultsContainer"></div>
-                </div>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>正在搜尋相關任務...</p>
             </div>
+
+            <div class="no-results" id="noResults">
+                <div class="no-results-icon">🔍</div>
+                <h3>輸入關鍵字開始搜尋</h3>
+                <p>例如：Redis、Pipeline、DB、網路開通、CloudSQL 等</p>
+            </div>
+
+            <div class="results-container" id="resultsContainer"></div>
         </div>
     </div>
 
     <script>
-        // ========== 設定區域 ==========
-        const CONFIG = {
-            password: 'cloud2024',  // 你可以修改這個密碼
-            knowledgeBase: {
-    "AP": {
-        full_name: "應用程式開發/維運團隊",
-        icon: "💻",
-        contact: "待補充",
-        tasks: [
-            "進行深度訪談 (Deep dive interviews)。",
-            "評估現有架構。",
-            "識別相關應用程式之間的相依性。",
-            "確認來源 DB 版本是否要升級 請GCP確認DB版本，再由AP決定是否要升級",
-            "請DBA連到地端測試環境DB 建立gcp_rep帳號，並授予權限，提供GCP",
-            "地端測試DB升級停機作業及參數調整",
-            "Code Change 細項請參考容器化細項頁面",
-            "LB起來後就可以申請了",
-            "AP提供來源IP鎖定清單，資安單位協助設定",
-            "在測試環境先申請gcp帳號，之後只要申請將group加到需要的project",
-            "於測試環境時，一併確認",
-            "AP單位要提需求",
-        ],
-        keywords: [
-            "應用",
-            "APP",
-            "代碼",
-            "程式",
-            "開發",
-            "DB",
-            "資料庫",
-            "系統",
-        ]
-    },
-    "DBA": {
-        full_name: "資料庫管理團隊",
-        icon: "🗄️",
-        contact: "待補充",
-        tasks: [
-            "(Optional) 請DBA將地端正式db複製到地端測試環境(新建 Instance)",
-        ],
-        keywords: [
-            "資料庫",
-            "DB",
-            "database",
-            "複製",
-            "版本",
-            "升級",
-            "備份",
-        ]
-    },
-    "GCP": {
-        full_name: "Google Cloud Platform 團隊",
-        icon: "☁️",
-        contact: "待補充",
-        tasks: [
-            "進行深度訪談 (Deep dive interviews)。",
-            "評估現有架構。",
-            "識別相關應用程式之間的相依性。",
-            "確認來源 DB 版本是否要升級 請GCP確認DB版本，再由AP決定是否要升級",
-            "Hub 管理員建立 IAM 政策，讓其他專案的 Spoke 管理員建立 VPC soke 請求",
-            "Spoke 管理員在專案內建立並請求 VPC spoke",
-            "Hub 管理員審查每條 Spoke 請求，然後同意或是否決請求",
-            "GCP Proxy VM建好，提供IP給雲團隊進行開通",
-            "Redis建立",
-            "CloudSQL建立",
-            "網路提供地端policy，請AP確認",
-            "1. GCP 提供架構說明，開會與雲端單位說明建置細節",
-        ],
-        keywords: [
-            "雲",
-            "GCP",
-            "Google Cloud",
-            "VPC",
-            "Redis",
-            "CloudSQL",
-            "IAM",
-            "Proxy",
-        ]
-    },
-    "RD": {
-        full_name: "研發部門",
-        icon: "🔬",
-        contact: "待補充",
-        tasks: [
-            "Elastic cloud or Cloud Logging",
-        ],
-        keywords: [
-            "研發",
-            "監控",
-            "logging",
-            "分析",
-            "監測",
-            "Elastic",
-        ]
-    },
-    "主機": {
-        full_name: "主機/基礎設施團隊",
-        icon: "🖥️",
-        contact: "待補充",
-        tasks: [
-            "GKE 建置",
-            "Cloud-init",
-            "若抄測試環境VM就不用",
-            "規格，參數設定",
-        ],
-        keywords: [
-            "主機",
-            "基礎設施",
-            "GKE",
-            "VM",
-            "虛擬機",
-            "建置",
-            "設定",
-        ]
-    },
-    "技術發展": {
-        full_name: "技術發展部門",
-        icon: "🛠️",
-        contact: "待補充",
-        tasks: [
-            "技術發展協助提供範本",
-        ],
-        keywords: [
-            "技術",
-            "CI/CD",
-            "Pipeline",
-            "容器",
-            "自動化",
-        ]
-    },
-    "網路": {
-        full_name: "網路團隊",
-        icon: "🌐",
-        contact: "待補充",
-        tasks: [
-            "請網路開通雲地DB抄寫連線",
-            "Hub 管理員建立 IAM 政策，讓其他專案的 Spoke 管理員建立 VPC soke 請求",
-            "Spoke 管理員在專案內建立並請求 VPC spoke",
-            "Hub 管理員審查每條 Spoke 請求，然後同意或是否決請求",
-            "網路提供地端policy，請AP確認",
-            "LB起來後就可以申請了",
-        ],
-        keywords: [
-            "網路",
-            "連線",
-            "firewall",
-            "policy",
-            "VPC",
-            "通訊",
-            "開通",
-            "LB",
-        ]
-    },
-    "設規": {
-        full_name: "系統規劃/架構團隊",
-        icon: "📐",
-        contact: "待補充",
-        tasks: [
-            "進行深度訪談 (Deep dive interviews)。",
-            "評估現有架構。",
-            "識別相關應用程式之間的相依性。",
-            "設規向雲團隊申請MDR連線啟用 (CrowdStrike)",
-            "GCP Proxy VM建好，提供IP給雲團隊進行開通",
-            "1. GCP 提供架構說明，開會與雲端單位說明建置細節",
-            "設規向雲2申請MDR連線啟用",
-        ],
-        keywords: [
-            "設計",
-            "架構",
-            "規劃",
-            "費用",
-            "預算",
-            "簽核",
-            "需求",
-        ]
-    },
-    "資安": {
-        full_name: "資訊安全團隊",
-        icon: "🔒",
-        contact: "待補充",
-        tasks: [
-            "測試/正式",
-            "AP提供來源IP鎖定清單，資安單位協助設定",
-        ],
-        keywords: [
-            "資安",
-            "安全",
-            "防火牆",
-            "IP",
-            "白名單",
-            "政策",
-            "權限",
-        ]
-    },
-    "雲端": {
-        full_name: "雲端平台團隊",
-        icon: "☁️🔧",
-        contact: "待補充",
-        tasks: [
-            "1. GCP 提供架構說明，開會與雲端單位說明建置細節",
-            "在測試環境先申請gcp帳號，之後只要申請將group加到需要的project",
-            "Redis建立",
-            "CloudSQL建立",
-            "AP單位要提需求",
-        ],
-        keywords: [
-            "雲端",
-            "帳號",
-            "group",
-            "project",
-            "申請",
-            "權限",
-        ]
-    },
-}
+        // 知識庫資料（來自 Excel v3.0）
+        const knowledgeBase = {
+            "GCP": {
+                full_name: "Google Cloud Platform 團隊",
+                tasks: [
+                    "進行深度訪談 (Deep dive interviews)。",
+                    "評估現有架構。",
+                    "識別相關應用程式之間的相依性。",
+                    "確認來源 DB 版本是否要升級\n請GCP確認DB版本，再由AP決定是否要升級",
+                    "Hub 管理員建立 IAM 政策，讓其他專案的 Spoke 管理員建立 VPC soke 請求",
+                    "Spoke 管理員在專案內建立並請求 VPC spoke",
+                    "Hub 管理員審查每條 Spoke 請求，然後同意或是否決請求",
+                    "GCP Proxy VM建好，提供IP給雲團隊進行開通",
+                    "Redis建立",
+                    "CloudSQL建立",
+                    "網路提供地端policy，請AP確認",
+                    "GCP提供架構說明，開會與雲端單位說明建置細節"
+                ]
+            },
+            "AP": {
+                full_name: "應用程式開發/維運團隊",
+                tasks: [
+                    "進行深度訪談 (Deep dive interviews)。",
+                    "評估現有架構。",
+                    "識別相關應用程式之間的相依性。",
+                    "確認來源 DB 版本是否要升級\n請GCP確認DB版本，再由AP決定是否要升級",
+                    "請DBA連到地端測試環境DB 建立gcp_rep帳號，並授予權限，提供GCP",
+                    "地端測試DB升級停機作業及參數調整",
+                    "Code Change 細項請參考容器化細項頁面",
+                    "Code Change 細項請參考容器化細項頁面",
+                    "網路提供地端policy，請AP確認",
+                    "LB起來後就可以申請了",
+                    "在測試環境先申請gcp帳號，之後只要申請將group加到需要的project",
+                    "AP提供來源IP鎖定清單，資安單位協助設定"
+                ]
+            },
+            "設規": {
+                full_name: "系統規劃/架構團隊",
+                tasks: [
+                    "進行深度訪談 (Deep dive interviews)。",
+                    "評估現有架構。",
+                    "識別相關應用程式之間的相依性。",
+                    "與超商確認GCP設計架構",
+                    "取得中華費用估算",
+                    "取得超商同意展開需求確認書簽核",
+                    "設規向雲團隊申請MDR連線啟用 (CrowdStrike)"
+                ]
+            },
+            "主機": {
+                full_name: "主機/基礎設施團隊",
+                tasks: [
+                    "GKE 建置",
+                    "Cloud-init",
+                    "若抄測試環境VM就不用",
+                    "規格，參數設定"
+                ]
+            },
+            "網路": {
+                full_name: "網路團隊",
+                tasks: [
+                    "請網路開通雲地DB抄寫連線",
+                    "Hub 管理員建立 IAM 政策，讓其他專案的 Spoke 管理員建立 VPC soke 請求",
+                    "Spoke 管理員在專案內建立並請求 VPC spoke",
+                    "Hub 管理員審查每條 Spoke 請求，然後同意或是否決請求",
+                    "網路提供地端policy，請AP確認",
+                    "LB起來後就可以申請了"
+                ]
+            },
+            "DBA": {
+                full_name: "資料庫管理團隊",
+                tasks: [
+                    "(Optional) 請DBA將地端正式db複製到地端測試環境(新建 Instance)"
+                ]
+            },
+            "資安": {
+                full_name: "資訊安全團隊",
+                tasks: [
+                    "測試/正式",
+                    "AP提供來源IP鎖定清單，資安單位協助設定"
+                ]
+            },
+            "RD": {
+                full_name: "研發部門",
+                tasks: [
+                    "Elastic cloud or Cloud Logging"
+                ]
+            },
+            "雲端": {
+                full_name: "雲端平台團隊",
+                tasks: [
+                    "GCP Proxy VM建好，提供IP給雲團隊進行開通",
+                    "設規向雲團隊申請MDR連線啟用 (CrowdStrike)",
+                    "GCP提供架構說明，開會與雲端單位說明建置細節",
+                    "在測試環境先申請gcp帳號，之後只要申請將group加到需要的project",
+                    "Redis建立",
+                    "CloudSQL建立"
+                ]
+            },
+            "技術發展": {
+                full_name: "技術發展部門",
+                tasks: [
+                    "技術發展協助提供範本",
+                    "技術發展協助提供範本"
+                ]
+            }
         };
 
-        // ========== 登入功能 ==========
+        // 登入邏輯
         const loginPage = document.getElementById('loginPage');
         const appPage = document.getElementById('appPage');
         const loginForm = document.getElementById('loginForm');
@@ -953,7 +598,8 @@
         const errorMessage = document.getElementById('errorMessage');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // 檢查是否已登入
+        const PASSWORD = 'askmeph2';
+
         function checkLogin() {
             const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
             if (isLoggedIn) {
@@ -978,7 +624,7 @@
             e.preventDefault();
             const password = passwordInput.value;
             
-            if (password === CONFIG.password) {
+            if (password === PASSWORD) {
                 sessionStorage.setItem('isLoggedIn', 'true');
                 errorMessage.classList.remove('show');
                 showApp();
@@ -995,158 +641,124 @@
             passwordInput.value = '';
         });
 
-        // ========== 應用功能 ==========
+        // 應用邏輯
         let isAppInitialized = false;
 
         function initializeApp() {
             if (isAppInitialized) return;
             isAppInitialized = true;
 
-            const taskInput = document.getElementById('taskInput');
-            const queryType = document.getElementById('queryType');
+            const searchInput = document.getElementById('searchInput');
             const searchBtn = document.getElementById('searchBtn');
             const clearBtn = document.getElementById('clearBtn');
             const loading = document.getElementById('loading');
             const noResults = document.getElementById('noResults');
             const resultsContainer = document.getElementById('resultsContainer');
-            const shareBtn = document.getElementById('shareBtn');
 
-            // 分享按鈕
-            shareBtn.addEventListener('click', () => {
-                const currentUrl = window.location.href;
-                const shareText = `📚 Cloud Migration Project - 任務分工知識庫\n\n加入我們的知識庫，快速查詢任務分工：\n\n${currentUrl}\n\n此連結受密碼保護，只有知道密碼的人才能訪問。`;
-                
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'Cloud Migration 知識庫',
-                        text: shareText,
-                        url: currentUrl
-                    });
-                } else {
-                    // 複製到剪貼板
-                    navigator.clipboard.writeText(currentUrl).then(() => {
-                        alert('✅ 連結已複製到剪貼板！\n\n' + currentUrl);
-                    });
-                }
-            });
-
-            // 搜尋功能
             searchBtn.addEventListener('click', performSearch);
-            taskInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && e.ctrlKey) performSearch();
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
             });
 
             clearBtn.addEventListener('click', () => {
-                taskInput.value = '';
+                searchInput.value = '';
                 resultsContainer.innerHTML = '';
-                noResults.classList.add('show');
+                noResults.classList.remove('hidden');
+                noResults.style.display = 'block';
             });
 
             function performSearch() {
-                const task = taskInput.value.trim().toLowerCase();
+                const query = searchInput.value.trim().toLowerCase();
                 
-                if (!task) {
-                    alert('請輸入任務描述');
+                if (!query) {
+                    alert('請輸入搜尋關鍵字');
                     return;
                 }
 
                 loading.classList.add('show');
-                noResults.classList.remove('show');
+                noResults.style.display = 'none';
                 resultsContainer.innerHTML = '';
 
-                // 模擬 AI 處理時間
                 setTimeout(() => {
-                    const results = queryType.value === 'ai' 
-                        ? searchWithAI(task) 
-                        : searchByKeyword(task);
+                    const results = searchTasks(query);
                     displayResults(results);
                     loading.classList.remove('show');
-                }, 1500);
+                }, 800);
             }
 
-            function searchWithAI(task) {
+            function searchTasks(query) {
                 const results = [];
-                
-                for (const [dept, data] of Object.entries(CONFIG.knowledgeBase)) {
-                    let score = 0;
-                    
-                    data.keywords.forEach(keyword => {
-                        if (task.includes(keyword)) score += 3;
-                    });
-                    
-                    data.tasks.forEach(taskItem => {
-                        if (task.includes(taskItem.toLowerCase())) score += 2;
-                    });
-                    
-                    if (task.includes(dept.toLowerCase())) score += 5;
-                    
-                    if (score > 0) {
-                        results.push({ dept, score, data });
-                    }
-                }
-                
-                return results.sort((a, b) => b.score - a.score);
-            }
 
-            function searchByKeyword(task) {
-                const results = [];
-                
-                for (const [dept, data] of Object.entries(CONFIG.knowledgeBase)) {
-                    if (dept.toLowerCase().includes(task) || 
-                        data.full_name.toLowerCase().includes(task)) {
-                        results.push({ dept, score: 10, data });
+                for (const [deptCode, deptData] of Object.entries(knowledgeBase)) {
+                    const matchedTasks = [];
+
+                    deptData.tasks.forEach((task, index) => {
+                        if (task.toLowerCase().includes(query)) {
+                            matchedTasks.push({ task, index });
+                        }
+                    });
+
+                    if (matchedTasks.length > 0) {
+                        results.push({
+                            dept: deptCode,
+                            fullName: deptData.full_name,
+                            tasks: matchedTasks.slice(0, 5) // 只顯示前 5 個
+                        });
                     }
                 }
-                
+
                 return results;
             }
 
             function displayResults(results) {
                 if (results.length === 0) {
-                    noResults.classList.add('show');
+                    noResults.style.display = 'block';
+                    noResults.innerHTML = '<div class="no-results-icon">❌</div><h3>找不到相關任務</h3><p>試試其他關鍵字</p>';
                     return;
                 }
 
-                resultsContainer.innerHTML = results.map((result, index) => {
-                    const { dept, score, data } = result;
-                    const percentage = Math.min(100, Math.round(score * 10));
-                    
-                    return `
-                        <div class="result-card show" style="animation-delay: ${index * 0.1}s;">
-                            <div class="department-header">
-                                <div class="dept-icon">${data.icon}</div>
-                                <div class="dept-info" style="flex: 1;">
-                                    <h3>${dept}</h3>
-                                    <p>${data.full_name}</p>
+                let taskNumber = 1;
+
+                results.forEach(result => {
+                    result.tasks.forEach((taskObj, index) => {
+                        const taskDiv = document.createElement('div');
+                        taskDiv.className = 'task-result';
+                        taskDiv.style.animationDelay = `${index * 0.1}s`;
+
+                        const deptList = result.dept;
+
+                        taskDiv.innerHTML = `
+                            <div class="task-title">
+                                <span class="task-number">${taskNumber}</span>
+                                ${taskObj.task.substring(0, 80)}${taskObj.task.length > 80 ? '...' : ''}
+                            </div>
+                            <div class="task-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">👥 負責單位:</span>
+                                    <span class="detail-value">
+                                        <div class="dept-badges">
+                                            <span class="dept-badge">${deptList}</span>
+                                        </div>
+                                    </span>
                                 </div>
-                                <div class="match-score">匹配度 ${percentage}%</div>
+                                <div class="detail-row">
+                                    <span class="detail-label">📌 部門全名:</span>
+                                    <span class="detail-value">${result.fullName}</span>
+                                </div>
                             </div>
+                        `;
 
-                            <div style="margin-bottom: 1rem;">
-                                <strong style="color: var(--text-dark);">聯繫方式：</strong>
-                                <p style="color: var(--text-light); font-size: 0.9rem;">${data.contact}</p>
-                            </div>
+                        resultsContainer.appendChild(taskDiv);
+                        taskNumber++;
 
-                            <div class="tasks-list">
-                                <h4>主要職責：</h4>
-                                ${data.tasks.map(task => `<div class="task-item">${task}</div>`).join('')}
-                            </div>
-
-                            <div class="keywords">
-                                ${data.keywords.map(kw => `<span class="keyword-badge">${kw}</span>`).join('')}
-                            </div>
-
-                            <div class="ai-badge">AI 推薦部門</div>
-                        </div>
-                    `;
-                }).join('');
+                        if (taskNumber > 5) return; // 最多顯示 5 個
+                    });
+                });
             }
 
-            // 初始化
-            noResults.classList.add('show');
+            noResults.style.display = 'block';
         }
 
-        // 頁面加載時檢查登入狀態
         window.addEventListener('load', checkLogin);
     </script>
 </body>
