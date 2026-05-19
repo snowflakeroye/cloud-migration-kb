@@ -730,127 +730,219 @@
     <script>
         // ========== 設定區域 ==========
         const CONFIG = {
-            password: '16151427',  // 你可以修改這個密碼
+            password: 'cloud2024',  // 你可以修改這個密碼
             knowledgeBase: {
-                "GCP": {
-                    full_name: "Google Cloud Platform 團隊",
-                    icon: "☁️",
-                    contact: "待補充",
-                    tasks: [
-                        "Hub 管理員建立 IAM 政策",
-                        "Spoke 管理員建立並請求 VPC spoke",
-                        "VPC Spoke 請求審查與同意",
-                        "Proxy VM 建立與 IP 提供",
-                        "Redis 建立",
-                        "CloudSQL 建立"
-                    ],
-                    keywords: ["雲", "GCP", "Google Cloud", "VPC", "Redis", "CloudSQL", "IAM", "Proxy"]
-                },
-                "AP": {
-                    full_name: "應用程式開發/維運團隊",
-                    icon: "💻",
-                    contact: "待補充",
-                    tasks: [
-                        "系統架構評估",
-                        "應用程式相依性識別",
-                        "DB 版本確認與升級",
-                        "Code Change 實施",
-                        "Code Review",
-                        "性能測試"
-                    ],
-                    keywords: ["應用", "APP", "代碼", "程式", "開發", "DB", "資料庫", "系統"]
-                },
-                "設規": {
-                    full_name: "系統規劃/架構團隊",
-                    icon: "📐",
-                    contact: "待補充",
-                    tasks: [
-                        "系統需求分析",
-                        "架構設計與規劃",
-                        "費用估算",
-                        "設計審查與簽核",
-                        "MDR 連線申請",
-                        "跨單位協調"
-                    ],
-                    keywords: ["設計", "架構", "規劃", "費用", "預算", "簽核", "需求"]
-                },
-                "主機": {
-                    full_name: "主機/基礎設施團隊",
-                    icon: "🖥️",
-                    contact: "待補充",
-                    tasks: [
-                        "GKE 建置與管理",
-                        "Cloud-init 配置",
-                        "虛擬機規格設定",
-                        "基礎設施部署",
-                        "系統參數調整"
-                    ],
-                    keywords: ["主機", "基礎設施", "GKE", "VM", "虛擬機", "建置", "設定"]
-                },
-                "網路": {
-                    full_name: "網路團隊",
-                    icon: "🌐",
-                    contact: "待補充",
-                    tasks: [
-                        "雲地連線開通",
-                        "VPC 建立與管理",
-                        "Firewall Policy 設定",
-                        "Load Balancer 配置",
-                        "網路通訊驗證"
-                    ],
-                    keywords: ["網路", "連線", "firewall", "policy", "VPC", "通訊", "開通", "LB"]
-                },
-                "DBA": {
-                    full_name: "資料庫管理團隊",
-                    icon: "🗄️",
-                    contact: "待補充",
-                    tasks: [
-                        "資料庫複製",
-                        "版本升級評估",
-                        "備份與復原策略",
-                        "性能優化",
-                        "帳號與權限管理"
-                    ],
-                    keywords: ["資料庫", "DB", "database", "複製", "版本", "升級", "備份"]
-                },
-                "資安": {
-                    full_name: "資訊安全團隊",
-                    icon: "🔒",
-                    contact: "待補充",
-                    tasks: [
-                        "安全政策制定",
-                        "IP 白名單管理",
-                        "防火牆規則設定",
-                        "權限控制審查",
-                        "安全測試"
-                    ],
-                    keywords: ["資安", "安全", "防火牆", "IP", "白名單", "政策", "權限"]
-                },
-                "RD": {
-                    full_name: "研發部門",
-                    icon: "🔬",
-                    contact: "待補充",
-                    tasks: [
-                        "監控系統建置",
-                        "日誌分析與管理",
-                        "性能監測",
-                        "告警設定"
-                    ],
-                    keywords: ["研發", "監控", "logging", "分析", "監測", "Elastic"]
-                },
-                "雲端": {
-                    full_name: "雲端平台團隊",
-                    icon: "☁️🔧",
-                    contact: "待補充",
-                    tasks: [
-                        "GCP 帳號申請與管理",
-                        "Group 與 Project 權限設定",
-                        "雲端資源配置",
-                        "成本管理"
-                    ],
-                    keywords: ["雲端", "帳號", "group", "project", "申請", "權限"]
-                }
-            }
+    "AP": {
+        full_name: "應用程式開發/維運團隊",
+        icon: "💻",
+        contact: "待補充",
+        tasks: [
+            "進行深度訪談 (Deep dive interviews)。",
+            "評估現有架構。",
+            "識別相關應用程式之間的相依性。",
+            "確認來源 DB 版本是否要升級 請GCP確認DB版本，再由AP決定是否要升級",
+            "請DBA連到地端測試環境DB 建立gcp_rep帳號，並授予權限，提供GCP",
+            "地端測試DB升級停機作業及參數調整",
+            "Code Change 細項請參考容器化細項頁面",
+            "LB起來後就可以申請了",
+            "AP提供來源IP鎖定清單，資安單位協助設定",
+            "在測試環境先申請gcp帳號，之後只要申請將group加到需要的project",
+            "於測試環境時，一併確認",
+            "AP單位要提需求",
+        ],
+        keywords: [
+            "應用",
+            "APP",
+            "代碼",
+            "程式",
+            "開發",
+            "DB",
+            "資料庫",
+            "系統",
+        ]
+    },
+    "DBA": {
+        full_name: "資料庫管理團隊",
+        icon: "🗄️",
+        contact: "待補充",
+        tasks: [
+            "(Optional) 請DBA將地端正式db複製到地端測試環境(新建 Instance)",
+        ],
+        keywords: [
+            "資料庫",
+            "DB",
+            "database",
+            "複製",
+            "版本",
+            "升級",
+            "備份",
+        ]
+    },
+    "GCP": {
+        full_name: "Google Cloud Platform 團隊",
+        icon: "☁️",
+        contact: "待補充",
+        tasks: [
+            "進行深度訪談 (Deep dive interviews)。",
+            "評估現有架構。",
+            "識別相關應用程式之間的相依性。",
+            "確認來源 DB 版本是否要升級 請GCP確認DB版本，再由AP決定是否要升級",
+            "Hub 管理員建立 IAM 政策，讓其他專案的 Spoke 管理員建立 VPC soke 請求",
+            "Spoke 管理員在專案內建立並請求 VPC spoke",
+            "Hub 管理員審查每條 Spoke 請求，然後同意或是否決請求",
+            "GCP Proxy VM建好，提供IP給雲團隊進行開通",
+            "Redis建立",
+            "CloudSQL建立",
+            "網路提供地端policy，請AP確認",
+            "1. GCP 提供架構說明，開會與雲端單位說明建置細節",
+        ],
+        keywords: [
+            "雲",
+            "GCP",
+            "Google Cloud",
+            "VPC",
+            "Redis",
+            "CloudSQL",
+            "IAM",
+            "Proxy",
+        ]
+    },
+    "RD": {
+        full_name: "研發部門",
+        icon: "🔬",
+        contact: "待補充",
+        tasks: [
+            "Elastic cloud or Cloud Logging",
+        ],
+        keywords: [
+            "研發",
+            "監控",
+            "logging",
+            "分析",
+            "監測",
+            "Elastic",
+        ]
+    },
+    "主機": {
+        full_name: "主機/基礎設施團隊",
+        icon: "🖥️",
+        contact: "待補充",
+        tasks: [
+            "GKE 建置",
+            "Cloud-init",
+            "若抄測試環境VM就不用",
+            "規格，參數設定",
+        ],
+        keywords: [
+            "主機",
+            "基礎設施",
+            "GKE",
+            "VM",
+            "虛擬機",
+            "建置",
+            "設定",
+        ]
+    },
+    "技術發展": {
+        full_name: "技術發展部門",
+        icon: "🛠️",
+        contact: "待補充",
+        tasks: [
+            "技術發展協助提供範本",
+        ],
+        keywords: [
+            "技術",
+            "CI/CD",
+            "Pipeline",
+            "容器",
+            "自動化",
+        ]
+    },
+    "網路": {
+        full_name: "網路團隊",
+        icon: "🌐",
+        contact: "待補充",
+        tasks: [
+            "請網路開通雲地DB抄寫連線",
+            "Hub 管理員建立 IAM 政策，讓其他專案的 Spoke 管理員建立 VPC soke 請求",
+            "Spoke 管理員在專案內建立並請求 VPC spoke",
+            "Hub 管理員審查每條 Spoke 請求，然後同意或是否決請求",
+            "網路提供地端policy，請AP確認",
+            "LB起來後就可以申請了",
+        ],
+        keywords: [
+            "網路",
+            "連線",
+            "firewall",
+            "policy",
+            "VPC",
+            "通訊",
+            "開通",
+            "LB",
+        ]
+    },
+    "設規": {
+        full_name: "系統規劃/架構團隊",
+        icon: "📐",
+        contact: "待補充",
+        tasks: [
+            "進行深度訪談 (Deep dive interviews)。",
+            "評估現有架構。",
+            "識別相關應用程式之間的相依性。",
+            "設規向雲團隊申請MDR連線啟用 (CrowdStrike)",
+            "GCP Proxy VM建好，提供IP給雲團隊進行開通",
+            "1. GCP 提供架構說明，開會與雲端單位說明建置細節",
+            "設規向雲2申請MDR連線啟用",
+        ],
+        keywords: [
+            "設計",
+            "架構",
+            "規劃",
+            "費用",
+            "預算",
+            "簽核",
+            "需求",
+        ]
+    },
+    "資安": {
+        full_name: "資訊安全團隊",
+        icon: "🔒",
+        contact: "待補充",
+        tasks: [
+            "測試/正式",
+            "AP提供來源IP鎖定清單，資安單位協助設定",
+        ],
+        keywords: [
+            "資安",
+            "安全",
+            "防火牆",
+            "IP",
+            "白名單",
+            "政策",
+            "權限",
+        ]
+    },
+    "雲端": {
+        full_name: "雲端平台團隊",
+        icon: "☁️🔧",
+        contact: "待補充",
+        tasks: [
+            "1. GCP 提供架構說明，開會與雲端單位說明建置細節",
+            "在測試環境先申請gcp帳號，之後只要申請將group加到需要的project",
+            "Redis建立",
+            "CloudSQL建立",
+            "AP單位要提需求",
+        ],
+        keywords: [
+            "雲端",
+            "帳號",
+            "group",
+            "project",
+            "申請",
+            "權限",
+        ]
+    },
+}
         };
 
         // ========== 登入功能 ==========
